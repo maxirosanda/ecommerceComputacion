@@ -1,0 +1,18 @@
+.Navbar{
+    display: flex;
+    background-color: blue;
+    color: white;
+    justify-content: flex-end;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.Navbar ul {
+    display: flex;
+    list-style-type: none;
+}
+.Navbar .logo{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}

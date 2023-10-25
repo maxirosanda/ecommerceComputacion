@@ -1,7 +1,6 @@
-import React from "react"
 import LinkNavbar from "../LinkNavbar"
 import './index.css'
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.png'
 
 const Index = () => {
     return(

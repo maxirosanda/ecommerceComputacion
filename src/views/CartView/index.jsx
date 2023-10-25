@@ -1,15 +1,13 @@
-import React, { useEffect, useState,useContext} from "react"
+import { useEffect, useState,useContext} from "react"
 import './index.css'
-import { CartContext } from "../../contextCart"
+import { CartContext } from "../../contexts/CartContext"
 
 const Index = () =>{
     const [cart,setCart] = useContext(CartContext)
-
-    useEffect(()=>{
-        console.log("montado carrito")
-        return () => console.log("desmontado carrito")
-    },[])
     
+    useEffect(()=>{
+        console.log(cart)
+    })
     return(
         <h2>carrito</h2>
     )

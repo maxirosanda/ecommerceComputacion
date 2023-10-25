@@ -1,11 +1,10 @@
-import React from 'react'
 import {Routes,Route,BrowserRouter} from 'react-router-dom'
-import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Index from './pages/Index'
-import ShoppingCart from './pages/ShoppingCart'
-import ViewProduct from './pages/ViewProduct'
-import CartProvider from './contextCart'
+import Navbar from './components/Navbar'
+import ProductView from './views/ProductView'
+import IndexView from './views/IndexView'
+import CartView from './views/CartView'
+import CartProvider from './contexts/CartContext'
 
 const App = () => {
   return (
@@ -13,9 +12,9 @@ const App = () => {
         <CartProvider>
           <Navbar/>
           <Routes>
-            <Route path='/'   element={<Index/>}/>
-              <Route path="product/:id" element={<ViewProduct/>} />
-            <Route path='/carrito'  element={<ShoppingCart/>} />
+            <Route path='/'   element={<IndexView/>}/>
+              <Route path="product/:id" element={<ProductView/>} />
+            <Route path='/carrito'  element={<CartView/>} />
           </Routes>
           <Footer/>
         </CartProvider>

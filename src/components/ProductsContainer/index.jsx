@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import './index.css'
 import Product from "../Product"
 
@@ -20,8 +20,6 @@ const Index = () =>{
 
     useEffect(()=>{  
         fetchData()
-        console.log("montado Productos")
-        return(()=> console.log("desmontado Productos"))
     },[])
 
     return (

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import {useState,useEffect} from "react"
 import './index.css'
 import { useParams } from "react-router-dom"
 import Product from "../../components/Product"
@@ -21,9 +21,7 @@ const Index = () =>{
     }
     
     useEffect(()=>{
-        console.log("producto montado")
         fetchData()
-        return () => console.log("producto desmontado")
     },[])
 
     return(

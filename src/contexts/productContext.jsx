@@ -8,9 +8,8 @@ const ProductsProvider = ({children}) =>{
     const [products,setProducts] = useState([])
    
     const getProducts = async () =>{
-        const querySnapshot = await getDocs(collection(db, "products"));
-        setProducts(querySnapshot)
-        console.log(products)
+        const querySnapshot = await getDocs(collection(db, "products"))
+        setProducts(querySnapshot.docs.map(doc => ({id:doc.id,...doc.data()})))
     }
 
     useEffect(()=>{

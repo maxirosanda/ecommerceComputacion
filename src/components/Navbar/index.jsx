@@ -9,6 +9,7 @@ const Index = () => {
             <ul>
                 <LinkNavbar text="Inicio" to="/"/>
                 <LinkNavbar text="Carrito" to="/carrito"/>
+                <LinkNavbar text="Edicion de Productos" to="/editProducts"/>
             </ul>
         </nav>
     )

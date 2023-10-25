@@ -6,7 +6,8 @@ const Index = () =>{
     const [cart,setCart] = useContext(CartContext)
 
     useEffect(()=>{
-        console.log(cart)
+        console.log("montado carrito")
+        return () => console.log("desmontado carrito")
     },[])
     
     return(

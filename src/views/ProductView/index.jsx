@@ -21,7 +21,9 @@ const Index = () =>{
     }
     
     useEffect(()=>{
+        console.log("producto montado")
         fetchData()
+        return () => console.log("producto desmontado")
     },[])
 
     return(

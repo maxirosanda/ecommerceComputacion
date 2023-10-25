@@ -1,7 +1,7 @@
 import React, { useState,useContext } from "react"
 import './index.css'
 import { Link } from "react-router-dom"
-import { CartContext } from "../../contextCart"
+import { CartContext } from "../../contexts/CartContext"
 
 const Index = ({product:{id,name,description,price,stock}}) =>{
     const [cart,setCart] = useContext(CartContext)

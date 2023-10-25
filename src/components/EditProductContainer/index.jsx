@@ -1,18 +1,17 @@
 import { useContext } from "react"
 import './index.css'
-import Product from "../Product"
 import { ProductsContext } from "../../contexts/productContext"
 import EditProduct from "../EditProduct"
 const Index = () =>{
 
-    const [products,setProducts] = useContext(ProductsContext)
+    const [products,handleUpdateProduct,,handleDeleteProduct] = useContext(ProductsContext)
 
     return (
         <div className="EditProductsContainer">
             {products.length == 0 ?
             <h1>cargando productos...</h1>
             :
-            products.map((product, index) => <EditProduct key={index} product={product} />)}
+            products.map((product, index) => <EditProduct key={index} product={product} handleDeleteProduct={handleDeleteProduct} handleUpdateProduct={handleUpdateProduct} />)}
         </div>
     )
 }

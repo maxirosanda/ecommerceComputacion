@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react"
+import {useState } from "react"
 import './index.css'
 
-const Index = ({product:{id,title,description,price,stock}}) =>{
+const Index = ({product:{id,title,description,price,stock},handleDeleteProduct,handleUpdateProduct}) =>{
 
-        const [newTitle,setNewTitle] = useState("")
+        const [newTitle,setNewTitle] = useState(title)
         const [newDescription,setNewDescription] = useState(description)
         const [newPrice,setNewPrice] = useState(price)
         const [newStock,setNewStock] = useState(stock)
-        useEffect(()=>{
-            console.log(newTitle,newDescription,newPrice,newStock)
-        },[title])
+        
+
        return ( <div className="EditProducts">
             <label>
-                Nombre: <input type="text"   onChange={(e)=>setNewTitle(e.target.value)} />
+                Nombre: <input type="text"  value={newTitle}  onChange={(e) => setNewTitle(e.target.value)} />
             </label>
             <label>
-                Descripcion: <textarea type="text"  value={description}  onChange={(e)=>setNewDescription(e.target.value)} />
+                Descripcion: <textarea type="text"  value={newDescription}  onChange={(e)=>setNewDescription(e.target.value)} />
             </label>
             <label>
-                Precio: <input type="number" min={0} defaultValue={price} onChange={(e)=>setNewPrice(e.target.value)} />
+                Precio: <input type="number" min={0} value={newPrice} onChange={(e)=>setNewPrice(e.target.value)} />
             </label>
             <label>
-                Stock: <input type="number" min={0}  defaultValue={stock} onChange={(e)=>setNewStock(e.target.value)} />
+                Stock: <input type="number" min={0}  value={newStock} onChange={(e)=>setNewStock(e.target.value)} />
             </label>
-            <button>eliminar</button>
-            <button>Actualizar</button>
+            <button onClick={()=>handleUpdateProduct(id,{title:newTitle,description:newDescription,price:newPrice,stock:newStock})}>Actualizar</button>
+            <button onClick={()=>handleDeleteProduct(id)}>Borrar</button>
         </div>
     )
 }

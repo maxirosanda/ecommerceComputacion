@@ -5,7 +5,7 @@ import { ProductsContext } from "../../contexts/productContext"
 
 const Index = () =>{
 
-    const [products,setProducts] = useContext(ProductsContext)
+    const [products] = useContext(ProductsContext)
 
     return (
         <div className="ProductsContainer">

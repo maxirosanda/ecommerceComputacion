@@ -15,7 +15,7 @@ const Index = ({product:{id,title,description,price,stock},handleAddToCart}) =>{
             <span>Precio: {price}</span>
             <input type="number" min={1} max={stock} value={quantity} onChange={(e)=> setQuantity(e.target.value)}/>
             <Link className="Link" to={`/product/${id}`}>Comprar</Link>
-            <button onClick={()=>handleAddToCart("9HRkBkT8hsZmyyNlVOL8",id,quantity)}>Carrito</button>
+            <button onClick={()=>handleAddToCart("9HRkBkT8hsZmyyNlVOL8",id,quantity,stock)}>Carrito</button>
         </div>
     )
 }

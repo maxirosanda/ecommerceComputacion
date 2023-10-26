@@ -7,7 +7,8 @@ import { CartContext } from "../../contexts/CartContext"
 const Index = () =>{
 
     const [products] = useContext(ProductsContext)
-    const [,handleAddToCart] = useContext(CartContext)
+    const [handleAddToCart,cart] = useContext(CartContext)
+
     return (
         <div className="ProductsContainer">
             {products.length == 0 ?

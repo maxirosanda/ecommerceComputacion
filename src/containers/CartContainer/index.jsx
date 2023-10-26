@@ -5,7 +5,7 @@ import CartItem from "../../components/CartItem"
 import { ProductsContext } from "../../contexts/productContext"
 const Index = () =>{
 
-    const [cart] = useContext(CartContext)
+    const [,cart,updateCartItemQuantity,handleRemoveFromCart] = useContext(CartContext)
     const [products] = useContext(ProductsContext)
 
     
@@ -16,7 +16,7 @@ const Index = () =>{
                     const matchedProduct = products.find(elementProduct => elementCart.idProduct === elementProduct.id);
                     
                     if (matchedProduct) {
-                        return <CartItem key={index} cart={{ ...matchedProduct, quantity: elementCart.quantity }} />;
+                        return <CartItem key={index} cart={{ ...matchedProduct, quantity: elementCart.quantity }} updateCartItemQuantity={updateCartItemQuantity} handleRemoveFromCart={handleRemoveFromCart} />;
                     }
                     return null;
                 })

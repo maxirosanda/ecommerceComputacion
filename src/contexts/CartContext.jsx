@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState,useEffect } from 'react'
 import {getDoc,doc,updateDoc, arrayUnion} from "firebase/firestore";
 import db from '../firebase'
 
@@ -7,6 +7,15 @@ export const CartContext = createContext([])
 const CartProvider = ({children}) =>{
 
     const [carts,setCarts] = useState([])
+
+    const getCarts = async (idBuyer) =>{
+      const querySnapshot = await getDoc(doc(db, "users",idBuyer))
+      setCarts(querySnapshot.data().cart)
+    }
+    useEffect(()=>{
+      getCarts("9HRkBkT8hsZmyyNlVOL8")
+  },[])
+
 
     const handleAddToCart = async (idBuyer,idProduct,quantity) => {
         
@@ -18,6 +27,7 @@ const CartProvider = ({children}) =>{
             await updateDoc(docRef, {
                 cart: nuevoCart
               })
+            console.log("producto agregado al carrito exitosamente")
           } else {
             console.log("No se encontró el documento.")
             return null
@@ -27,7 +37,7 @@ const CartProvider = ({children}) =>{
           return null
         }
       }
-
+      
     return  <CartContext.Provider value={[carts,handleAddToCart]}>
                 {children}
             </CartContext.Provider>

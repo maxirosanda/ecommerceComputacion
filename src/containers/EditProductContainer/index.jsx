@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import './index.css'
 import { ProductsContext } from "../../contexts/productContext"
-import EditProduct from "../EditProduct"
+import EditProduct from "../../components/EditProduct"
 const Index = () =>{
 
     const [products,handleUpdateProduct,,handleDeleteProduct] = useContext(ProductsContext)

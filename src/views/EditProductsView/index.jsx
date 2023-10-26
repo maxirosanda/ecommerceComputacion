@@ -1,4 +1,4 @@
-import EditProductsContainer from "../../components/EditProductContainer"
+import EditProductsContainer from "../../containers/EditProductContainer"
 import CreateProduct from "../../components/CreateProducts"
 const Index = () => {
     return  <>

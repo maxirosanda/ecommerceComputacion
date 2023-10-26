@@ -1,5 +1,5 @@
 import './index.css'
-import ProductsContainer from "../../components/ProductsContainer"
+import ProductsContainer from "../../containers/ProductsContainer"
 
 const Index = () => {
     return(

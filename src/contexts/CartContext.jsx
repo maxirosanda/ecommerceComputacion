@@ -6,12 +6,14 @@ export const CartContext = createContext([])
 
 const CartProvider = ({children}) =>{
 
-    const [carts,setCarts] = useState([])
+    const [cart,setCarts] = useState([])
+    const [cartItem,setCartItem] = useState({})
 
     const getCarts = async (idBuyer) =>{
       const querySnapshot = await getDoc(doc(db, "users",idBuyer))
       setCarts(querySnapshot.data().cart)
     }
+
     useEffect(()=>{
       getCarts("9HRkBkT8hsZmyyNlVOL8")
   },[])
@@ -104,7 +106,7 @@ const CartProvider = ({children}) =>{
       }
   }
   
-    return  <CartContext.Provider value={[handleAddToCart,carts,updateCartItemQuantity,handleRemoveFromCart]}>
+    return  <CartContext.Provider value={[handleAddToCart,cart,updateCartItemQuantity,handleRemoveFromCart]}>
                 {children}
             </CartContext.Provider>
 

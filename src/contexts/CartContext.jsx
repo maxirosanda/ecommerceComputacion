@@ -40,7 +40,6 @@ const CartProvider = ({children}) =>{
                 const nuevoCart = arrayUnion({ idProduct, quantity });
                 user.cart = [...user.cart, ...nuevoCart.wu];
             }
-
             await updateDoc(docRef, { cart: user.cart });
             getCart("9HRkBkT8hsZmyyNlVOL8");
             console.log("Producto agregado al carrito exitosamente");

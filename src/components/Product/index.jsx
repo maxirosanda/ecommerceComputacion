@@ -3,7 +3,7 @@ import './index.css'
 import { Link } from "react-router-dom"
 
 
-const Index = ({product:{id,title,description,price,stock},handleAddToCart,cart}) =>{
+const Index = ({product:{id,title,description,price,stock},handleAddToCart,cart,handleAddToFavorites}) =>{
     
     const [quantity,setQuantity] = useState(1)
     const cartFind = cart.find(item => item.idProduct == id )
@@ -19,6 +19,7 @@ const Index = ({product:{id,title,description,price,stock},handleAddToCart,cart}
             : <span>Ya esta en tu carrito</span>
             }
             <Link className="Link" to={`/product/${id}`}>Comprar</Link>
+            <button onClick={()=>handleAddToFavorites("9HRkBkT8hsZmyyNlVOL8",id)}>Favoritos</button>
             <button onClick={()=>handleAddToCart("9HRkBkT8hsZmyyNlVOL8",id,quantity,stock)}>Carrito</button>
         </div>
     )

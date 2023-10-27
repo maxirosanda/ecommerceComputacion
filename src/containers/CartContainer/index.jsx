@@ -18,6 +18,7 @@ const Index = () =>{
                     if (matchedProduct) {
                         return <CartItem key={index} cart={{ ...matchedProduct, quantity: elementCart.quantity }} updateCartItemQuantity={updateCartItemQuantity} handleRemoveFromCart={handleRemoveFromCart} />;
                     }
+                    handleRemoveFromCart("9HRkBkT8hsZmyyNlVOL8",elementCart.idProduct)
                     return null;
                 })
     

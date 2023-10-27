@@ -6,16 +6,15 @@ export const CartContext = createContext([])
 
 const CartProvider = ({children}) =>{
 
-    const [cart,setCarts] = useState([])
-    const [cartItem,setCartItem] = useState({})
+    const [cart,setCart] = useState([])
 
-    const getCarts = async (idBuyer) =>{
+    const getCart = async (idBuyer) =>{
       const querySnapshot = await getDoc(doc(db, "users",idBuyer))
-      setCarts(querySnapshot.data().cart)
+      setCart(querySnapshot.data().cart)
     }
 
     useEffect(()=>{
-      getCarts("9HRkBkT8hsZmyyNlVOL8")
+      getCart("9HRkBkT8hsZmyyNlVOL8")
   },[])
 
 
@@ -43,7 +42,7 @@ const CartProvider = ({children}) =>{
             }
 
             await updateDoc(docRef, { cart: user.cart });
-            getCarts("9HRkBkT8hsZmyyNlVOL8");
+            getCart("9HRkBkT8hsZmyyNlVOL8");
             console.log("Producto agregado al carrito exitosamente");
         } else {
             console.log("No se encontró el documento.");
@@ -66,7 +65,7 @@ const CartProvider = ({children}) =>{
                 if (cartItemIndex !== -1) {
                     user.cart[cartItemIndex].quantity = newQuantity;
                     await updateDoc(docRef, { cart: user.cart });
-                    getCarts("9HRkBkT8hsZmyyNlVOL8");
+                    getCart("9HRkBkT8hsZmyyNlVOL8");
                     console.log("Cantidad de producto actualizada exitosamente");
                 } else {
                     console.log("No se encontró el producto en el carrito.");
@@ -91,7 +90,7 @@ const CartProvider = ({children}) =>{
               if (cartItemIndex !== -1) {
                   user.cart.splice(cartItemIndex, 1); // Elimina el elemento del carrito
                   await updateDoc(docRef, { cart: user.cart });
-                  getCarts("9HRkBkT8hsZmyyNlVOL8");
+                  getCart("9HRkBkT8hsZmyyNlVOL8");
                   console.log("Producto eliminado del carrito exitosamente");
               } else {
                   console.log("El producto no está en el carrito.");

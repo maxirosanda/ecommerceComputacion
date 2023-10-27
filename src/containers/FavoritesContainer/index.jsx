@@ -17,10 +17,10 @@ const Index = () =>{
         
                     if (matchedProduct) {
                         return <FavoriteItem key={index} favorite={matchedProduct} handleRemoveFromFavorites={handleRemoveFromFavorites}/>;
-                    }else{
-                        handleRemoveFromFavorites("9HRkBkT8hsZmyyNlVOL8",elementFavorite)
-                        return null;
                     }
+                    handleRemoveFromFavorites("9HRkBkT8hsZmyyNlVOL8",elementFavorite)
+                    return null;
+                    
                     
                 })
     

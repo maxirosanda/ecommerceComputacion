@@ -8,9 +8,10 @@ const Index = () => {
             <img className="logo" src={logo} alt="" />
             <ul>
                 <LinkNavbar text="Inicio" to="/"/>
+                <LinkNavbar text="Favoritos" to="/favorites"/>
                 <LinkNavbar text="Carrito" to="/carrito"/>
                 <LinkNavbar text="Edicion de Productos" to="/editProducts"/>
-                <LinkNavbar text="Favoritos" to="/favorites"/>
+                
             </ul>
         </nav>
     )

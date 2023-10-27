@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { collection, getDocs,doc,getDoc,updateDoc,addDoc,deleteDoc } from "firebase/firestore"
+import { collection, getDocs,doc,getDoc,updateDoc,addDoc,deleteDoc,arrayUnion } from "firebase/firestore"
 import db from '../firebase'
 export const ProductsContext = createContext([])
 
@@ -12,11 +12,25 @@ const ProductsProvider = ({children}) =>{
         setProducts(querySnapshot.docs.map(doc => ({id:doc.id,...doc.data()})))
     }
 
-    const handleCreateProduct = async (product) =>{
+    const handleCreateProduct = async (product,idSeller) =>{
         try {
-            await addDoc(collection(db, "products"), product)
-            getProducts()
-            console.log('Documento agregado correctamente')
+            const docRef = doc(db, "users",idSeller)
+            const docSnap = await getDoc(docRef)
+            if (docSnap.exists()) {
+              const docRefProduct = await addDoc(collection(db, "products"), {...product,idSeller})
+              const docSnapshotProduct = await getDoc(docRefProduct)
+              const idProduct = docSnapshotProduct.id;
+              const user = docSnap.data()
+              const nuevoSoldProductIds= arrayUnion(idProduct)
+              user.soldProductIds = [...user.soldProductIds, ... nuevoSoldProductIds.wu]
+              console.log(user.soldProductIds)
+              await updateDoc(docRef, { soldProductIds: user.soldProductIds })
+              getProducts()
+              console.log('Documento agregado correctamente')
+          } else {
+              console.log("No se encontró el documento.");
+              return null;
+          }
           } catch (error) {
             console.error('Error al agregar el documento:', error)
           }

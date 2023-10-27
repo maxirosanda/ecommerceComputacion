@@ -13,7 +13,7 @@ const Index = () =>{
         const handleSubmit = (e) => {
             e.preventDefault()
         
-            handleCreateProduct({ title, description, price, stock })
+            handleCreateProduct({ title, description, price, stock },"9HRkBkT8hsZmyyNlVOL8")
 
             setTitle("")
             setDescription("")

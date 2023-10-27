@@ -5,13 +5,16 @@ import EditProduct from "../../components/EditProduct"
 const Index = () =>{
 
     const [products,handleUpdateProduct,,handleDeleteProduct] = useContext(ProductsContext)
-
+    const productsSeller = products.map(product => {
+        if(product.idSeller == "9HRkBkT8hsZmyyNlVOL8") return product
+    })
+    console.log(productsSeller)
     return (
         <div className="EditProductsContainer">
-            {products.length == 0 ?
+            {productsSeller.length == 0 ?
             <h1>cargando productos...</h1>
             :
-            products.map((product, index) => <EditProduct key={index} product={product} handleDeleteProduct={handleDeleteProduct} handleUpdateProduct={handleUpdateProduct} />)}
+            productsSeller.map((product, index) => <EditProduct key={index} product={product} handleDeleteProduct={handleDeleteProduct} handleUpdateProduct={handleUpdateProduct} />)}
         </div>
     )
 }

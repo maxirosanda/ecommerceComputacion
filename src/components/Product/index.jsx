@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 const Index = ({product:{id,title,description,price,stock},handleAddToCart,cart}) =>{
     
     const [quantity,setQuantity] = useState(1)
-    const stock_available = stock - cart.find((item)=> item.idProduct == id ).quantity
+    const stock_available = stock - cart.find((item)=> item.idProduct == id ).quantity 
 
     return(
         <div className="Products">

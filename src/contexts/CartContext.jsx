@@ -1,21 +1,33 @@
 import { createContext, useState,useEffect } from 'react'
-import {getDoc,doc,updateDoc, arrayUnion} from "firebase/firestore";
+import {getDoc,doc,updateDoc, arrayUnion, getDocs, collection} from "firebase/firestore";
 import db from '../firebase'
 
 export const CartContext = createContext([])
 
 const CartProvider = ({children}) =>{
 
-    const [cart,setCarts] = useState([])
-    const [cartItem,setCartItem] = useState({})
+    const [cart,setCart] = useState([])
 
-    const getCarts = async (idBuyer) =>{
-      const querySnapshot = await getDoc(doc(db, "users",idBuyer))
-      setCarts(querySnapshot.data().cart)
+    const getCart = async (idBuyer) =>{
+      const querySnapshotUser = await getDoc(doc(db, "users",idBuyer))
+      const cartData = querySnapshotUser.data().cart
+      const querySnapshotProducts = await getDocs(collection(db,"products"))
+      const productsData = querySnapshotProducts.docs.map(doc => ({id:doc.id,...doc.data()}))
+      const newCart = cartData.map((item)=>{
+        const product = productsData.find(product => product.id == item.idProduct)
+        if(product){
+            if(item.quantity <= product.stock){
+                return item
+            }
+        }
+      }).filter(Boolean)
+      console.log(newCart)
+      setCart(newCart)
+      
     }
 
     useEffect(()=>{
-      getCarts("9HRkBkT8hsZmyyNlVOL8")
+      getCart("9HRkBkT8hsZmyyNlVOL8")
   },[])
 
 
@@ -43,7 +55,7 @@ const CartProvider = ({children}) =>{
             }
 
             await updateDoc(docRef, { cart: user.cart });
-            getCarts("9HRkBkT8hsZmyyNlVOL8");
+            getCart("9HRkBkT8hsZmyyNlVOL8");
             console.log("Producto agregado al carrito exitosamente");
         } else {
             console.log("No se encontró el documento.");
@@ -66,7 +78,7 @@ const CartProvider = ({children}) =>{
                 if (cartItemIndex !== -1) {
                     user.cart[cartItemIndex].quantity = newQuantity;
                     await updateDoc(docRef, { cart: user.cart });
-                    getCarts("9HRkBkT8hsZmyyNlVOL8");
+                    getCart("9HRkBkT8hsZmyyNlVOL8");
                     console.log("Cantidad de producto actualizada exitosamente");
                 } else {
                     console.log("No se encontró el producto en el carrito.");
@@ -91,7 +103,7 @@ const CartProvider = ({children}) =>{
               if (cartItemIndex !== -1) {
                   user.cart.splice(cartItemIndex, 1); // Elimina el elemento del carrito
                   await updateDoc(docRef, { cart: user.cart });
-                  getCarts("9HRkBkT8hsZmyyNlVOL8");
+                  getCart("9HRkBkT8hsZmyyNlVOL8");
                   console.log("Producto eliminado del carrito exitosamente");
               } else {
                   console.log("El producto no está en el carrito.");
